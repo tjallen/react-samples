@@ -6,9 +6,6 @@ import ReactDOM from 'react-dom';
 import Counter from './components/counter';
 
 ReactDOM.render(
-  <div>
-    <h1>Hello world</h1>
-    <Counter />
-  </div>,
+  <Counter />,
   document.getElementById('app')
 );
