@@ -1,4 +1,5 @@
-# basic flux example
-going over some flux again from scratch rather than boilerplates so i got something to mess abaat wiv, ya get me
+# going over some react + flux/redux stuff from scratch again
 
-thx
+basic counter example w/ only state
+counter port to flux RIP, deleted in classic git mishap :'(
+redux counter
