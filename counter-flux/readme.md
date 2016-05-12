@@ -1,0 +1,1 @@
+react counter component using flux architecture

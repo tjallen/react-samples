@@ -1,0 +1,29 @@
+body {
+  background-color: #eee;
+  color: #242424;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+/* example to check postCSS is working 
+.example {
+    display: flex;
+    transition: all .5s;
+    user-select: none;
+    background: linear-gradient(to bottom, white, black);
+}
+
+.phone {
+    &_title {
+        width: 500px;
+        @media (max-width: 500px) {
+            width: auto;
+        }
+        body.is_dark & {
+            color: white;
+        }
+    }
+    img {
+        display: block;
+    }
+}
+*/
