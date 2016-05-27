@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import Todo from './Todo';
 
 export default class TodoList extends Component {
   constructor() {
@@ -49,7 +50,11 @@ export default class TodoList extends Component {
           />
         </form>
           {this.state.todos.map(todo =>
-            <li key={todo.id}>{todo.text}</li>
+            <Todo
+              text={todo.text}
+              id={todo.id}
+              key={todo.id}
+            />
           )}
       </div>
     );
