@@ -16,8 +16,16 @@ export default class Todo extends Component {
 */
 
 // stateless version of above
-const Todo = (props) => <li>{props.text}</li>;
+const Todo = (props) =>
+  <li
+    style={{ textDecoration: props.completed ? 'line-through' : 'none' }}
+    onClick={() => props.onClick(props.id)}
+  >
+  {props.text}
+  </li>;
 Todo.propTypes = {
   text: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
 };
 export default Todo;
