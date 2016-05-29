@@ -10,9 +10,10 @@ export default class TodoList extends Component {
       inputValue: '',
       todos: [
         // some placeholder todos
-        { text: 'foo', id: shortid.generate(), completed: false },
-        { text: 'bar', id: shortid.generate(), completed: true },
-        { text: 'baz', id: shortid.generate(), completed: false },
+        { text: 'Write some todo tasks in the field', id: shortid.generate(), completed: false },
+        { text: 'Enter to submit. Click to complete.', id: shortid.generate(), completed: false },
+        { text: '???', id: shortid.generate(), completed: true },
+        { text: 'Profit', id: shortid.generate(), completed: false },
       ],
     };
     // pre bind
