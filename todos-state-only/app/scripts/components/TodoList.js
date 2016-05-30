@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Todo from './Todo';
+import Filter from './Filter';
 import shortid from 'shortid';
 
 export default class TodoList extends Component {
@@ -8,6 +9,7 @@ export default class TodoList extends Component {
     // initial state
     this.state = {
       inputValue: '',
+      currentFilter: 'ALL',
       todos: [
         // some placeholder todos
         { text: 'Write some todo tasks in the field', id: shortid.generate(), completed: false },
@@ -18,14 +20,16 @@ export default class TodoList extends Component {
     };
     // pre bind
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.toggleTodo = this.toggleTodo.bind(this);
     this.clearCompleted = this.clearCompleted.bind(this);
     this.removeTodo = this.removeTodo.bind(this);
     this.findTodoIndex = this.findTodoIndex.bind(this);
+    this.setVisibilityFilter = this.setVisibilityFilter.bind(this);
+    this.filterVisibleTodos = this.filterVisibleTodos.bind(this);
   }
   // link input field value changes w/ state
-  handleInputChange(e) {
+  handleChange(e) {
     this.setState({
       inputValue: e.target.value,
     });
@@ -36,18 +40,18 @@ export default class TodoList extends Component {
     // make sure there's some input field content
     if (this.state.inputValue.length > 0) {
       this.addTodo(this.state.inputValue);
-      this.state.inputValue = '';
     }
   }
   // add a new todo to the state.todos array
   addTodo(text) {
     // set up the new state after adding our new todo
-    const newTodos = [
+    const todos = [
       ...this.state.todos,
       { text, id: shortid.generate(), completed: false },
     ];
     this.setState({
-      todos: newTodos,
+      todos,
+      inputValue: '',
     });
   }
   // helper function to get the index of the todo in state array by id
@@ -64,41 +68,62 @@ export default class TodoList extends Component {
       }
     );
     // create new todos array with replaced object !completed
-    const newTodos = [
+    const todos = [
       ...this.state.todos.slice(0, i),
       toggledTodo,
       ...this.state.todos.slice(i + 1),
     ];
     this.setState({
-      todos: newTodos,
+      todos,
     });
   }
   // remove a todo by id - return new array w/ all ids except passed id
   removeTodo(id) {
-    const newTodos = this.state.todos.filter((todo) => todo.id !== id);
+    const todos = this.state.todos.filter((todo) => todo.id !== id);
     this.setState({
-      todos: newTodos,
+      todos,
     });
   }
   // remove all completed todos
   clearCompleted() {
-    const newTodos = this.state.todos.filter((todo) => todo.completed !== true);
+    const todos = this.state.todos.filter((todo) => todo.completed !== true);
     this.setState({
-      todos: newTodos,
+      todos,
     });
   }
+  // update state currentFilter property passed up from Filter filterName prop
+  setVisibilityFilter(currentFilter) {
+    this.setState({
+      currentFilter,
+    });
+  }
+  // decide which todos to render based on the state's currentFilter
+  filterVisibleTodos(currentFilter) {
+    switch (currentFilter) {
+      case 'ALL':
+        return this.state.todos;
+      case 'ACTIVE':
+        return this.state.todos.filter(todo => !todo.completed);
+      case 'COMPLETED':
+        return this.state.todos.filter(todo => todo.completed);
+      default:
+        return this.state.todos;
+    }
+  }
   render() {
+    // rather than mapping all this.state.todos, defer to filter instead
+    const todosToRender = this.filterVisibleTodos(this.state.currentFilter);
     return (
       <div>
         <h1>TodoList</h1>
         <form onSubmit={this.handleSubmit}>
           <input
             value={this.state.inputValue}
-            onChange={this.handleInputChange}
+            onChange={this.handleChange}
           />
         </form>
         <ul>
-          {this.state.todos.map(todo =>
+          {todosToRender.map(todo =>
             <Todo
               text={todo.text}
               id={todo.id}
@@ -115,6 +140,27 @@ export default class TodoList extends Component {
         >
         Clear completed
         </button>
+        <ul>
+          Filter:
+          <Filter
+            filterName="ALL"
+            onFilterClick={this.setVisibilityFilter}
+          >
+            All
+          </Filter>
+          <Filter
+            filterName="ACTIVE"
+            onFilterClick={this.setVisibilityFilter}
+          >
+            Active
+          </Filter>
+          <Filter
+            filterName="COMPLETED"
+            onFilterClick={this.setVisibilityFilter}
+          >
+            Completed
+          </Filter>
+        </ul>
       </div>
     );
   }
