@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 
 const Filter = (props) =>
-  <li>
+  <li className="filter__item">
     <button
       href="#"
       onClick={() => props.onFilterClick(props.filterName)}

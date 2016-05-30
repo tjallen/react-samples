@@ -1,14 +1,15 @@
 import React, { PropTypes } from 'react';
 
 const Todo = (props) =>
-  <li>
+  <li className="todo__item">
     <p
-      style={{ textDecoration: props.completed ? 'line-through' : 'none' }}
+      className={props.completed ? 'todo--completed' : 'todo--active'}
       onClick={() => props.onClick(props.id)}
     >
     {props.text}
     </p>
     <button
+      className="button--remove"
       onClick={() => props.onRemoveClick(props.id)}
     >X</button>
   </li>;
