@@ -144,18 +144,21 @@ export default class TodoList extends Component {
           <Filter
             filterName="ALL"
             onFilterClick={this.setVisibilityFilter}
+            currentFilter={this.state.currentFilter}
           >
             Show all
           </Filter>
           <Filter
             filterName="ACTIVE"
             onFilterClick={this.setVisibilityFilter}
+            currentFilter={this.state.currentFilter}
           >
             Active only
           </Filter>
           <Filter
             filterName="COMPLETED"
             onFilterClick={this.setVisibilityFilter}
+            currentFilter={this.state.currentFilter}
           >
             Completed only
           </Filter>

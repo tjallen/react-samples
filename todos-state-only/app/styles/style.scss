@@ -50,6 +50,14 @@ li.filter__item {
   }
 }
 
+li.filter__item--active {
+  button {
+    background-color: transparent;
+    color: $inactive;
+    cursor: default;
+  }
+}
+
 button {
   border: none;
   background-color: $link;
