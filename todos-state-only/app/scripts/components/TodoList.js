@@ -84,6 +84,12 @@ export default class TodoList extends Component {
       todos,
     });
   }
+  // get number of active todos
+  activeTodoCount() {
+    const numCompleted = this.state.todos.filter(todo => todo.completed === true);
+    const numActive = (this.state.todos.length - numCompleted.length);
+    return numActive;
+  }
   // remove all completed todos
   clearCompleted() {
     const todos = this.state.todos.filter((todo) => todo.completed !== true);
@@ -135,6 +141,7 @@ export default class TodoList extends Component {
           )}
         </ul>
         <br />
+        <p>{this.activeTodoCount()} remaining</p>
         <button
           onClick={this.clearCompleted}
         >
