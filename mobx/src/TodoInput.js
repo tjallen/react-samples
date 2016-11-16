@@ -12,12 +12,14 @@ export default class TodoInput extends Component {
   }
   onTodoSubmit(e) {
     e.preventDefault();
-    this.props.store.addTodo({ text: this.state.text });
+    this.props.store.addTodo(this.state.text);
+    console.log('todoSubmit', this.state.text);
   }
   render() {
     return (
       <div>
         <form onSubmit={this.onTodoSubmit}>
+          <p>Add a todo:</p>
           <input
             onChange={this.handleChange}
           />

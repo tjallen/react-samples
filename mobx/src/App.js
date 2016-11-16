@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import TodoStore from './TodoStore';
 import TodoList from './TodoList';
 import TodoInput from './TodoInput';
+import TodoFilter from './TodoFilter';
 import './App.css';
 
 class App extends Component {
@@ -13,8 +14,9 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>todoMobX</h2>
         </div>
-        <TodoList todos={TodoStore.getTodos()} />
+        <TodoList store={TodoStore} />
         <TodoInput store={TodoStore} />
+        <TodoFilter store={TodoStore} />
       </div>
     );
   }
