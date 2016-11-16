@@ -1,3 +1,5 @@
+import { observable } from 'mobx';
+
 class TodoStore {
   todos = [
     { id: 1, text: 'foo', completed: false },
